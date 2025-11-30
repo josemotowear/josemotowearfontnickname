@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>JOSE Font Önizleme Paneli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      background: #ffffff;
+      color: #111111;
+      font-family: Arial, sans-serif;
+      padding: 8px;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 30px;
+      margin: 8px 0 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #111;
+    }
+    .top-panel {
+      background: #f7f7f7;
+      border-radius: 14px;
+      padding: 10px 12px 12px;
+      margin-bottom: 14px;
+      border: 1px solid #dddddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .input-box {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    #nickInput {
+      width: 100%;
+      max-width: 640px;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #cccccc;
+      outline: none;
+      font-size: 20px;
+      background: #ffffff;
+      color: #111;
+      text-align: center;
+    }
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #333;
+    }
+    .options-row label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .options-row input[type="checkbox"],
+    .options-row input[type="radio"] {
+      accent-color: #ffb300;
+      cursor: pointer;
+    }
+    .options-group-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+    }
+    .size-row {
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #333;
+    }
+    #sizeSelect {
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid #cccccc;
+      background: #ffffff;
+      font-size: 13px;
+    }
+    .qr-panel {
+      margin-top: 8px;
+      background: #fcfcfc;
+      border-radius: 12px;
+      padding: 8px 10px 10px;
+      border: 1px dashed #c9c9c9;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .qr-left { flex: 1 1 220px; }
+    .qr-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #222;
+    }
+    .qr-desc {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    #qrInput {
+      width: 100%;
+      padding: 7px;
+      border-radius: 8px;
+      border: 1px solid #cccccc;
+      outline: none;
+      background: #ffffff;
+      color: #111;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+    #qrBtn {
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      background: linear-gradient(90deg,#ffb300,#ff6f00);
+      color: #111;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    #qrPreviewWrapper {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+    }
+    #qrPreview {
+      width: 160px;
+      height: 160px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #dddddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #qrHidden { display:none; }
+    .share-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 12px;
+      color: #555;
+    }
+    #shareBtn {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ffb300;
+      background: #fff7e0;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: #885200;
+    }
+    #shareStatus { min-height:16px; }
+    .font-card {
+      background: #fafafa;
+      padding: 14px 16px 16px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #dddddd;
+      transition: 0.16s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .font-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .font-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .font-name {
+      font-size: 14px;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+    .font-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background:#eee;
+      color:#666;
+      margin-left:6px;
+    }
+    .copy-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 2px 4px;
+      color: #555;
+    }
+    .copy-btn:hover {
+      color: #000;
+      transform: scale(1.1);
+    }
+    .preview {
+      word-break: break-word;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #000;
+    }
+    .nick-text {
+      display: inline-block;
+      margin: 0 4px;
+    }
+    .inline-icon {
+      height: 40px;
+      width: auto;
+      vertical-align: middle;
+      display:inline-block;
+    }
+    .inline-at {
+  font-size: 24px;               /* sabit boyut */
+  line-height: 1;
+  font-family: Arial, sans-serif !important;  /* her zaman aynı font */
+  font-weight: 700;
+  color: #333;
+  margin-right: 4px;
+}
+    .insta-icon {
+      height: 36px;
+      width: 36px;
+    }
+    @media (max-width: 600px) {
+      .preview { font-size: 30px; }
+      #qrPreview { width:130px;height:130px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>JOSE Font Önizleme Paneli</h1>
+
+  <div class="top-panel">
+    <div class="input-box">
+      <input id="nickInput" type="text" placeholder="Ön izleme metnini yaz..." />
+    </div>
+
+    <div class="options-row">
+      <span class="options-group-title">İKONLAR:</span>
+      <label><input type="checkbox" id="chkQrIcon"> QR ikonu</label>
+      <label><input type="checkbox" id="chkInstaIcon"> Instagram ikonu</label>
+      <label><input type="checkbox" id="chkAtIcon"> @ işareti</label>
+
+      <span class="options-group-title">KONUM (QR + INSTA):</span>
+      <label><input type="radio" name="iconPos" value="before"> Baştan</label>
+      <label><input type="radio" name="iconPos" value="after" checked> Sondan</label>
+    </div>
+
+    <div class="options-row">
+      <span class="options-group-title">KATEGORİ:</span>
+      <label><input type="radio" name="catFilter" value="all" checked> Hepsi</label>
+      <label><input type="radio" name="catFilter" value="imza"> İmza</label>
+      <label><input type="radio" name="catFilter" value="normal"> Normal</label>
+    </div>
+
+    <div class="size-row">
+      <span class="options-group-title">BOYUT:</span>
+      <label>Genişlik:
+        <select id="sizeSelect">
+          <option value="15">15 cm</option>
+          <option value="20" selected>20 cm</option>
+          <option value="30">30 cm</option>
+          <option value="40">40 cm</option>
+          <option value="50">50 cm</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="qr-panel">
+      <div class="qr-left">
+        <div class="qr-title">Linkten QR Kod Oluştur</div>
+        <div class="qr-desc">
+          Örn: Instagram profil linki, web sitesi… Oluşan QR'ı sağ tıklayıp PNG olarak kaydedebilirsin.
+        </div>
+        <input id="qrInput" type="text" placeholder="https://instagram.com/..." />
+        <button id="qrBtn">QR KOD OLUŞTUR</button>
+      </div>
+      <div id="qrPreviewWrapper">
+        <div id="qrPreview">
+          <span style="font-size:11px;color:#777;text-align:center;padding:6px;">
+            Buraya QR kod gelecek
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <button id="shareBtn">Bu ayarları link olarak kopyala</button>
+      <span id="shareStatus"></span>
+    </div>
+
+    <div id="qrHidden"></div>
+  </div>
+
+  <div id="fontList"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+  /* ======================
+     FONT TANIMLARI
+     ====================== */
+
+    /* ======================
+     FONT TANIMLARI
+     ====================== */
+
+  const fontFiles = [
+    /* ---- İMZA FONTLAR (imza klasörü) ---- */
+    { name: 'Amarilysse Glowheart', css: 'F_AmarilysseGlowheart', path: 'imza/Amarilysse Glowheart - Demo - Personal Use Only.ttf', format: 'truetype', type: 'imza' },
+    { name: 'Andreagi Signature',   css: 'F_AndreagiSignature',   path: 'imza/Andreagi Signature.otf',                             format: 'opentype', type: 'imza' },
+    { name: 'Autograf Personal',    css: 'F_AutografPersonal',    path: 'imza/Autograf_PersonalUseOnly.ttf',                       format: 'truetype', type: 'imza' },
+    { name: 'Bastliga One (OTF)',   css: 'F_BastligaOneOTF',      path: 'imza/Bastliga One.otf',                                   format: 'opentype', type: 'imza' },
+    { name: 'Bastliga One (TTF)',   css: 'F_BastligaOneTTF',      path: 'imza/Bastliga One.ttf',                                   format: 'truetype', type: 'imza' },
+    { name: 'BillaMount Regular',   css: 'F_BillaMount',          path: 'imza/BillaMount-Regular.ttf',                             format: 'truetype', type: 'imza' },
+    { name: 'Billy Argel',          css: 'F_BillyArgel',          path: 'imza/Billy Argel Font___.ttf',                            format: 'truetype', type: 'imza' },
+    { name: 'Bofly',                css: 'F_Bofly',               path: 'imza/Bofly.ttf',                                          format: 'truetype', type: 'imza' },
+    { name: 'Callifornia',          css: 'F_Callifornia',         path: 'imza/Callifornia.otf',                                    format: 'opentype', type: 'imza' },
+    { name: 'Christmas Snowflake',  css: 'F_ChristmasSnowflake',  path: 'imza/Christmas Snowflake.ttf',                            format: 'truetype', type: 'imza' },
+    { name: 'Elegant Wedding',      css: 'F_ElegantWedding',      path: 'imza/ElegantWeddingDemoRegular.ttf',                      format: 'truetype', type: 'imza' },
+    { name: 'Housttely Signature',  css: 'F_HousttelySignature',  path: 'imza/Housttely Signature.ttf',                            format: 'truetype', type: 'imza' },
+    { name: 'Jalliya',              css: 'F_Jalliya',             path: 'imza/Jalliya.ttf',                                        format: 'truetype', type: 'imza' },
+    { name: 'Johnfoster',           css: 'F_Johnfoster',          path: 'imza/Johnfoster-qZjj6.ttf',                               format: 'truetype', type: 'imza' },
+    { name: 'Kalste',               css: 'F_Kalste',              path: 'imza/Kalste.otf',                                         format: 'opentype', type: 'imza' },
+    { name: 'Kristabelle',          css: 'F_Kristabelle',         path: 'imza/Kristabelle-6YagM.ttf',                              format: 'truetype', type: 'imza' },
+    { name: 'Mobalys Regular',      css: 'F_MobalysRegular',      path: 'imza/Mobalys-Regular.ttf',                                format: 'truetype', type: 'imza' },
+    { name: 'MrDeHaviland Regular', css: 'F_MrDeHavilandRegular', path: 'imza/MrDeHaviland-Regular.ttf',                           format: 'truetype', type: 'imza' },
+    { name: 'NovaQuinta',           css: 'F_NovaQuinta',          path: 'imza/NovaQuinta_PERSONAL_USE_ONLY.otf',                   format: 'opentype', type: 'imza' },
+    { name: 'Peony Whisper',        css: 'F_PeonyWhisper',        path: 'imza/Peony Whisper.otf',                                  format: 'opentype', type: 'imza' },
+    { name: 'Ridenation Script',    css: 'F_RidenationScript',    path: 'imza/RidenationfreepersonaluseScrip-k8Yd.otf',            format: 'opentype', type: 'imza' },
+    { name: 'SanBrainy',            css: 'F_SanBrainy',           path: 'imza/SanBrainy.otf',                                      format: 'opentype', type: 'imza' },
+    { name: 'Stenley Signature',    css: 'F_StenleySignature',    path: 'imza/StenleySignature-mLgmm.otf',                         format: 'opentype', type: 'imza' },
+
+    /* ---- NORMAL YAZI FONTLAR (normal klasörü) ---- */
+    { name: '04B_03',                      css: 'F_04B_03',                 path: 'normal/04B_03.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ABBERANC',                   css: 'F_ABBERANC',               path: 'normal/ABBERANC.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'Action Force',               css: 'F_ActionForce',            path: 'normal/Action_Force.ttf',                             format: 'truetype', type: 'normal' },
+    { name: 'Adventure',                  css: 'F_Adventure',              path: 'normal/Adventure.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'Aerovias Brasil NF',         css: 'F_AeroviasBrasilNF',       path: 'normal/Aerovias Brasil NF.ttf',                       format: 'truetype', type: 'normal' },
+    { name: 'AGENCYR',                    css: 'F_AGENCYR',                path: 'normal/AGENCYR.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'AGENCYB',                    css: 'F_AGENCYB',                path: 'normal/AGENCYB.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'ALBA',                       css: 'F_ALBA',                   path: 'normal/ALBA__.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ALBAM',                      css: 'F_ALBAM',                  path: 'normal/ALBAM_.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'AldotheApache',              css: 'F_AldotheApache',          path: 'normal/AldotheApache.ttf',                           format: 'truetype', type: 'normal' },
+    { name: 'alev',                       css: 'F_alev',                   path: 'normal/alev.ttf',                                     format: 'truetype', type: 'normal' },
+    { name: 'Alfphabet IV',               css: 'F_AlfphabetIV',            path: 'normal/Alfphabet-IV.ttf',                             format: 'truetype', type: 'normal' },
+    { name: 'aliee13',                    css: 'F_aliee13',                path: 'normal/aliee13.ttf',                                  format: 'truetype', type: 'normal' },
+    { name: 'ALIEES',                     css: 'F_ALIEES',                 path: 'normal/ALIEES.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ALIEESB',                    css: 'F_ALIEESB',                path: 'normal/ALIEESB.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'ALIEESBI',                   css: 'F_ALIEESBI',               path: 'normal/ALIEESBI.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'ALIEESI',                    css: 'F_ALIEESI',                path: 'normal/ALIEESI.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'AmazOOSTROV Fine',           css: 'F_AmazOOSTROV',            path: 'normal/AmazOOSTROVFine.ttf',                          format: 'truetype', type: 'normal' },
+    { name: 'American Captain',           css: 'F_AmericanCaptain',        path: 'normal/American Captain.ttf',                         format: 'truetype', type: 'normal' },
+    { name: 'AniMe Vision',               css: 'F_AniMeVision',            path: 'normal/AniMe Vision - MB_EN Regular.ttf',             format: 'truetype', type: 'normal' },
+    { name: 'Bangers Regular',            css: 'F_BangersRegular',         path: 'normal/Bangers-Regular 2.ttf',                        format: 'truetype', type: 'normal' },
+    { name: 'Batangas Bold 700',          css: 'F_BatangasBold700',        path: 'normal/Batangas Bold 700.otf',                        format: 'opentype', type: 'normal' },
+    { name: 'batmfa',                     css: 'F_batmfa',                 path: 'normal/batmfa.ttf',                                   format: 'truetype', type: 'normal' },
+    { name: 'BlackRockFree Normal',       css: 'F_BlackRockFreeNormal',    path: 'normal/BlackRockFree-Normal.otf',                     format: 'opentype', type: 'normal' },
+    { name: 'BNMachine',                  css: 'F_BNMachine',              path: 'normal/BNMachine.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'BRLNSB',                     css: 'F_BRLNSB',                 path: 'normal/BRLNSB.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'BRLNSDB',                    css: 'F_BRLNSDB',                path: 'normal/BRLNSDB.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'BRLNSR',                     css: 'F_BRLNSR',                 path: 'normal/BRLNSR.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'brooklyn',                   css: 'F_brooklyn',               path: 'normal/brooklyn.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'BRUSHSCI',                   css: 'F_BRUSHSCI',               path: 'normal/BRUSHSCI.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'charbb_reg',                 css: 'F_charbb_reg',             path: 'normal/charbb_reg.ttf',                               format: 'truetype', type: 'normal' },
+    { name: 'CHICSA',                     css: 'F_CHICSA',                 path: 'normal/CHICSA.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'chinese rocks rg',           css: 'F_chineserocks',           path: 'normal/chinese rocks rg.ttf',                         format: 'truetype', type: 'normal' },
+    { name: 'CHINESER',                   css: 'F_CHINESER',               path: 'normal/CHINESER.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'clonewars2',                 css: 'F_clonewars2',             path: 'normal/clonewars2.ttf',                               format: 'truetype', type: 'normal' },
+    { name: 'Comic Book',                 css: 'F_ComicBook',              path: 'normal/Comic Book.ttf',                               format: 'truetype', type: 'normal' },
+    { name: 'COOPBL',                     css: 'F_COOPBL',                 path: 'normal/COOPBL.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'CooperBlackStd',             css: 'F_CooperBlackStd',         path: 'normal/CooperBlackStd.otf',                           format: 'opentype', type: 'normal' },
+    { name: 'CooperBlackStd Italic',      css: 'F_CooperBlackStdItalic',   path: 'normal/CooperBlackStd-Italic.otf',                    format: 'opentype', type: 'normal' },
+    { name: 'dc_s',                       css: 'F_dc_s',                   path: 'normal/dc_s.ttf',                                     format: 'truetype', type: 'normal' },
+    { name: 'DIENASTY',                   css: 'F_DIENASTY',               path: 'normal/DIENASTY.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'DIMITRI',                    css: 'F_DIMITRI',                path: 'normal/DIMITRI.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'Distortion Brain Mind',      css: 'F_distortion',             path: 'normal/distortion_of_the_brain_and_mind.ttf',         format: 'truetype', type: 'normal' },
+    { name: 'DJB My Mood Ring',           css: 'F_DJBMoodRing',            path: 'normal/DJB My Mood Ring Says Blah.ttf',               format: 'truetype', type: 'normal' },
+    { name: 'djcourag',                   css: 'F_djcourag',               path: 'normal/djcourag.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'Duvall',                     css: 'F_Duvall',                 path: 'normal/Duvall.ttf',                                   format: 'truetype', type: 'normal' },
+    { name: 'DuvallCondensed Bold',       css: 'F_DuvallCondBold',         path: 'normal/DuvallCondensed Bold.ttf',                     format: 'truetype', type: 'normal' },
+    { name: 'DuvallCondensed',            css: 'F_DuvallCondensed',        path: 'normal/DuvallCondensed.ttf',                          format: 'truetype', type: 'normal' },
+    { name: 'DuvallOutline',              css: 'F_DuvallOutline',          path: 'normal/DuvallOutline.ttf',                            format: 'truetype', type: 'normal' },
+    { name: 'DuvallSmallCaps Bold',       css: 'F_DuvallSmallCapsBold',    path: 'normal/DuvallSmallCaps Bold.ttf',                     format: 'truetype', type: 'normal' },
+    { name: 'DuvallSmallCaps',            css: 'F_DuvallSmallCaps',        path: 'normal/DuvallSmallCaps.ttf',                          format: 'truetype', type: 'normal' },
+    { name: 'DuvallSmallCapsCond Bold',   css: 'F_DuvallSmallCapsCondBold',path: 'normal/DuvallSmallCapsCondensed Bold.ttf',            format: 'truetype', type: 'normal' },
+    { name: 'DuvallSmallCapsCondensed',   css: 'F_DuvallSmallCapsCondensed',path:'normal/DuvallSmallCapsCondensed.ttf',                 format: 'truetype', type: 'normal' },
+    { name: 'DuvallSmallCapsOutline',     css: 'F_DuvallSmallCapsOutline', path: 'normal/DuvallSmallCapsOutline.ttf',                   format: 'truetype', type: 'normal' },
+    { name: 'ERASBD',                     css: 'F_ERASBD',                 path: 'normal/ERASBD.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ERASDEMI',                   css: 'F_ERASDEMI',               path: 'normal/ERASDEMI.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'ERASLGHT',                   css: 'F_ERASLGHT',               path: 'normal/ERASLGHT.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'ERASMD',                     css: 'F_ERASMD',                 path: 'normal/ERASMD.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ethnocen',                   css: 'F_ethnocen',               path: 'normal/ethnocen.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'Ethnocentric Rg It',         css: 'F_EthnocentricRgIt',       path: 'normal/Ethnocentric Rg It.otf',                       format: 'opentype', type: 'normal' },
+    { name: 'Ethnocentric Rg',            css: 'F_EthnocentricRg',         path: 'normal/Ethnocentric Rg.otf',                          format: 'opentype', type: 'normal' },
+    { name: 'EXH',                        css: 'F_EXH',                    path: 'normal/EXH___.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'EXL',                        css: 'F_EXL',                    path: 'normal/EXL___.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'FEASFBI',                    css: 'F_FEASFBI',                path: 'normal/FEASFBI.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'FEASFBRG',                   css: 'F_FEASFBRG',               path: 'normal/FEASFBRG.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'Burbank Big Condensed',      css: 'F_BurbankBig',             path: 'normal/FontsFree-Net-Burbank-Big-Condensed-Black-700.ttf', format:'truetype', type:'normal' },
+    { name: 'FRSCRIPT',                   css: 'F_FRSCRIPT',               path: 'normal/FRSCRIPT.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'Gang Bangers',               css: 'F_GangBangers',            path: 'normal/Gang Bangers.ttf',                             format: 'truetype', type: 'normal' },
+    { name: 'Gecko',                      css: 'F_Gecko',                  path: 'normal/Gecko_PersonalUseOnly.ttf',                    format: 'truetype', type: 'normal' },
+    { name: 'GOODTIME',                   css: 'F_GOODTIME',               path: 'normal/GOODTIME.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'Gotham Narrow Book',         css: 'F_GothamNarrowBook',       path: 'normal/Gotham Narrow Book.otf',                       format: 'opentype', type: 'normal' },
+    { name: 'Gotham Nights',              css: 'F_GothamNights',           path: 'normal/Gotham Nights.ttf',                            format: 'truetype', type: 'normal' },
+    { name: 'Gotham Black',               css: 'F_GothamBlack',            path: 'normal/Gotham-Black.otf',                             format: 'opentype', type: 'normal' },
+    { name: 'HARRYP',                     css: 'F_HARRYP',                 path: 'normal/HARRYP.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'Hellbound',                  css: 'F_Hellbound',              path: 'normal/Hellbound.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'HOMOARAK',                   css: 'F_HOMOARAK',               path: 'normal/HOMOARAK.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'HOOKED',                     css: 'F_HOOKED',                 path: 'normal/HOOKED.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'KINGRICH',                   css: 'F_KINGRICH',               path: 'normal/KINGRICH.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'kinifed',                    css: 'F_kinifed',                path: 'normal/kinifed.ttf',                                  format: 'truetype', type: 'normal' },
+    { name: 'KLB',                        css: 'F_KLB',                    path: 'normal/KLB___.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'Laser Rod',                  css: 'F_LaserRod',               path: 'normal/Laser Rod.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'LuckiestGuy',                css: 'F_LuckiestGuy',            path: 'normal/LuckiestGuy 2.ttf',                            format: 'truetype', type: 'normal' },
+    { name: 'MATURASC',                   css: 'F_MATURASC',               path: 'normal/MATURASC.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'NFS_by_JLTV',                css: 'F_NFSbyJLTV',              path: 'normal/NFS_by_JLTV.ttf',                              format: 'truetype', type: 'normal' },
+    { name: 'N-Gage',                     css: 'F_NGage',                  path: 'normal/N-Gage.ttf',                                   format: 'truetype', type: 'normal' },
+    { name: 'NHL Ducks',                  css: 'F_NHLDucks',               path: 'normal/NHL Ducks.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'NOTMK',                      css: 'F_NOTMK',                  path: 'normal/NOTMK_.TTF',                                   format: 'truetype', type: 'normal' },
+    { name: 'ObelixProB-cyr',             css: 'F_ObelixProB',             path: 'normal/ObelixProB-cyr.ttf',                           format: 'truetype', type: 'normal' },
+    { name: 'PALSCRI',                    css: 'F_PALSCRI',                path: 'normal/PALSCRI.TTF',                                  format: 'truetype', type: 'normal' },
+    { name: 'pcrypt',                     css: 'F_pcrypt',                 path: 'normal/pcrypt.ttf',                                   format: 'truetype', type: 'normal' },
+    { name: 'PLAYBILL',                   css: 'F_PLAYBILL',               path: 'normal/PLAYBILL.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'PRICEDOW',                   css: 'F_PRICEDOW',               path: 'normal/PRICEDOW.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'pricedown bl',               css: 'F_pricedownbl',           path: 'normal/pricedown bl.ttf',                             format: 'truetype', type: 'normal' },
+    { name: 'QUARTZO demo',               css: 'F_QUARTZO',                path: 'normal/QUARTZO-demo 2.ttf',                           format: 'truetype', type: 'normal' },
+    { name: 'RADIOSTA',                   css: 'F_RADIOSTA',               path: 'normal/RADIOSTA.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'Red Right Hand',             css: 'F_RedRightHand',          path: 'normal/Red Right Hand.ttf',                           format: 'truetype', type: 'normal' },
+    { name: 'return',                     css: 'F_return',                 path: 'normal/return.ttf',                                   format: 'truetype', type: 'normal' },
+    { name: 'ROCKYAOE',                   css: 'F_ROCKYAOE',               path: 'normal/ROCKYAOE.TTF',                                 format: 'truetype', type: 'normal' },
+    { name: 'ROGFonts Regular',           css: 'F_ROGFontsRegular',        path: 'normal/ROGFonts-Regular_0.otf',                       format: 'opentype', type: 'normal' },
+
+    /* ---- NORMAL-2 (normal-2 klasörü) ---- */
+    { name: 'SCRIPTBL',                   css: 'F_SCRIPTBL',              path: 'normal-2/SCRIPTBL.TTF',                               format: 'truetype', type: 'normal' },
+    { name: 'SerpentisBlack',             css: 'F_SerpentisBlack',        path: 'normal-2/SerpentisBlack.ttf',                         format: 'truetype', type: 'normal' },
+    { name: 'SF Iron Gothic Bold Oblique',css: 'F_SFIronGothic',          path: 'normal-2/SF Iron Gothic Bold Oblique.ttf',            format: 'truetype', type: 'normal' },
+    { name: 'SF Speakeasy Oblique',       css: 'F_SFSpeakeasyObl',        path: 'normal-2/SF Speakeasy Oblique.ttf',                   format: 'truetype', type: 'normal' },
+    { name: 'SF Speakeasy',               css: 'F_SFSpeakeasy',           path: 'normal-2/SF Speakeasy.ttf',                           format: 'truetype', type: 'normal' },
+    { name: 'SF Sports Night NS Upright', css: 'F_SFSportsNightUpr',      path: 'normal-2/SF Sports Night NS Upright.ttf',             format: 'truetype', type: 'normal' },
+    { name: 'SF Sports Night NS',         css: 'F_SFSportsNight',         path: 'normal-2/SF Sports Night NS.ttf',                     format: 'truetype', type: 'normal' },
+    { name: 'SFDistantGalaxy Alternate',  css: 'F_SFDistantGalaxyAlt',    path: 'normal-2/SFDistantGalaxyAlternate.ttf',               format: 'truetype', type: 'normal' },
+    { name: 'SFDistantGalaxy Alternate-It',css:'F_SFDistantGalaxyAltIt',  path: 'normal-2/SFDistantGalaxyAlternate-It.ttf',            format: 'truetype', type: 'normal' },
+    { name: 'SitkaVF',                    css: 'F_SitkaVF',               path: 'normal-2/SitkaVF.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'SitkaVF Italic',             css: 'F_SitkaVFItalic',         path: 'normal-2/SitkaVF-Italic.ttf',                         format: 'truetype', type: 'normal' },
+    { name: 'spacefr',                    css: 'F_spacefr',               path: 'normal-2/spacefr.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'spacefri',                   css: 'F_spacefri',              path: 'normal-2/spacefri.ttf',                               format: 'truetype', type: 'normal' },
+    { name: 'SQUEALER',                   css: 'F_SQUEALER',              path: 'normal-2/SQUEALER.TTF',                               format: 'truetype', type: 'normal' },
+    { name: 'Starcraft',                  css: 'F_Starcraft',             path: 'normal-2/Starcraft.ttf',                              format: 'truetype', type: 'normal' },
+    { name: 'starseri',                   css: 'F_starseri',              path: 'normal-2/starseri.TTF',                               format: 'truetype', type: 'normal' },
+    { name: 'stentiga',                   css: 'F_stentiga',              path: 'normal-2/stentiga.ttf',                               format: 'truetype', type: 'normal' },
+    { name: 'subway',                     css: 'F_subway',                path: 'normal-2/subway.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'Tempo',                      css: 'F_Tempo',                 path: 'normal-2/Tempo.ttf',                                  format: 'truetype', type: 'normal' },
+    { name: 'Unrealised',                 css: 'F_Unrealised',            path: 'normal-2/Unrealised.ttf',                             format: 'truetype', type: 'normal' },
+    { name: 'vijaya',                     css: 'F_vijaya',                path: 'normal-2/vijaya.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'vijayab',                    css: 'F_vijayab',               path: 'normal-2/vijayab.ttf',                                format: 'truetype', type: 'normal' },
+    { name: 'wbv4lp',                     css: 'F_wbv4lp',                path: 'normal-2/wbv4lp.ttf',                                 format: 'truetype', type: 'normal' },
+    { name: 'zephyreg',                   css: 'F_zephyreg',              path: 'normal-2/zephyreg.ttf',                               format: 'truetype', type: 'normal' },
+  ];
+
+
+  /* Dinamik @font-face oluştur */
+  fontFiles.forEach(f => {
+    const st = document.createElement('style');
+    st.textContent = `
+      @font-face {
+        font-family: "${f.css}";
+        src: url("${f.path}") format("${f.format}");
+      }
+    `;
+    document.head.appendChild(st);
+  });
+
+  const fonts = fontFiles; // render için
+
+  /* ======================
+     UYGULAMA KODU
+     ====================== */
+
+  const list        = document.getElementById('fontList');
+  const input       = document.getElementById('nickInput');
+  const chkQrIcon   = document.getElementById('chkQrIcon');
+  const chkInsta    = document.getElementById('chkInstaIcon');
+  const chkAt       = document.getElementById('chkAtIcon');
+  const posRadios   = document.querySelectorAll('input[name="iconPos"]');
+  const catRadios   = document.querySelectorAll('input[name="catFilter"]');
+  const qrInput     = document.getElementById('qrInput');
+  const qrBtn       = document.getElementById('qrBtn');
+  const qrPrev      = document.getElementById('qrPreview');
+  const qrHidden    = document.getElementById('qrHidden');
+  const shareBtn    = document.getElementById('shareBtn');
+  const shareStatus = document.getElementById('shareStatus');
+  const sizeSelect  = document.getElementById('sizeSelect');
+
+  let qrDataUrl = null;
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function getInstagramSvg() {
+    return `
+      <svg class="inline-icon insta-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="6" ry="6"
+              fill="none" stroke="#111111" stroke-width="1.7" />
+        <circle cx="12" cy="12" r="5.2"
+              fill="none" stroke="#111111" stroke-width="1.4" />
+        <circle cx="17" cy="7" r="1.2" fill="#111111" />
+      </svg>
+    `;
+  }
+
+  function getIconPos() {
+    let v='after';
+    posRadios.forEach(r=>{ if(r.checked) v=r.value; });
+    return v;
+  }
+
+  function getCategoryFilter() {
+    let v='all';
+    catRadios.forEach(r=>{ if(r.checked) v=r.value; });
+    return v;
+  }
+
+  function getSizeCm() {
+    return parseInt(sizeSelect.value || '20',10);
+  }
+
+  function getPreviewFontSizePx() {
+    const cm = getSizeCm();
+    if (cm===15) return 32;
+    if (cm===20) return 40;
+    if (cm===30) return 48;
+    if (cm===40) return 56;
+    if (cm===50) return 64;
+    return 40;
+  }
+
+  function buildNickWithIcons(text) {
+    const clean = escapeHtml(text || 'JOSE');
+    const atHtml = chkAt.checked ? '<span class="inline-at">@</span>' : '';
+    const qrHtml =
+      (chkQrIcon.checked && qrDataUrl)
+        ? `<img src="${qrDataUrl}" class="inline-icon" alt="QR">`
+        : (chkQrIcon.checked ? '<span class="inline-icon">■</span>' : '');
+    const instaHtml = chkInsta.checked ? getInstagramSvg() : '';
+    const nickSpan = `<span class="nick-text">${clean}</span>`;
+    const pos = getIconPos();
+
+    if (pos === 'before') {
+      // BAŞTAN: QR → INSTA → @ → NICK
+      return qrHtml + instaHtml + atHtml + nickSpan;
+    } else {
+      // SONDAN: @ → NICK → QR → INSTA
+      return atHtml + nickSpan + qrHtml + instaHtml;
+    }
+  }
+
+  function render(text) {
+    list.innerHTML = '';
+    const content = buildNickWithIcons(text);
+    const sizePx  = getPreviewFontSizePx();
+    const cat     = getCategoryFilter();
+
+    fonts
+      .filter(f => cat === 'all' || f.type === cat)
+      .forEach(f => {
+        list.innerHTML += `
+          <div class="font-card">
+            <div class="font-header">
+              <div class="font-name">
+                ${f.name}
+                <span class="font-tag">${f.type === 'imza' ? 'İmza' : 'Normal'}</span>
+              </div>
+              <button class="copy-btn" data-font="${f.name}">📋</button>
+            </div>
+            <div class="preview" style="font-family:'${f.css}'; font-size:${sizePx}px">
+              ${content}
+            </div>
+          </div>
+        `;
+      });
+  }
+
+  function createQr(link, currentNick) {
+    if (!link) return;
+    qrHidden.innerHTML = '';
+    const qrCode = new QRCode(qrHidden, { text: link, width:256, height:256 });
+
+    setTimeout(() => {
+      const canvas = qrHidden.querySelector('canvas');
+      const imgTag = qrHidden.querySelector('img');
+      if (canvas)      qrDataUrl = canvas.toDataURL('image/png');
+      else if (imgTag) qrDataUrl = imgTag.src;
+      else             qrDataUrl = null;
+
+      if (qrDataUrl) {
+        qrPrev.innerHTML = `<img src="${qrDataUrl}" style="width:100%;height:100%;object-fit:contain;" alt="QR">`;
+      } else {
+        qrPrev.innerHTML = '<span style="font-size:11px;color:#777;">QR oluşturulamadı</span>';
+      }
+      render(currentNick);
+    }, 200);
+  }
+
+  function getCopyText(fontName) {
+    const nick    = input.value || '';
+    const sizeCm  = getSizeCm();
+    const pos     = getIconPos();
+    const posText = pos === 'before' ? 'Baştan' : 'Sondan';
+
+    const icons = [];
+    if (chkQrIcon.checked) icons.push('QR');
+    if (chkInsta.checked)  icons.push('Instagram');
+    if (chkAt.checked)     icons.push('@');
+
+    const iconsText = icons.length ? icons.join(', ') : 'Yok';
+    const qrActive  = chkQrIcon.checked && (qrDataUrl !== null);
+    const qrLink    = qrInput.value.trim() || '-';
+
+    return (
+`Font: ${fontName}
+Metin: ${nick}
+İkonlar: ${iconsText}
+Konum: ${posText}
+QR: ${qrActive ? 'Aktif' : 'Pasif'}
+QR Link: ${qrLink}
+Boyut: ${sizeCm} cm`
+    );
+  }
+
+  input.addEventListener('input', e => render(e.target.value));
+  [chkQrIcon, chkInsta, chkAt].forEach(el => el.addEventListener('change', () => render(input.value)));
+  posRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
+  catRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
+  sizeSelect.addEventListener('change', () => render(input.value));
+
+  qrBtn.addEventListener('click', () => {
+    const link = qrInput.value.trim();
+    if (!link) return;
+    createQr(link, input.value);
+  });
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    const fontName = btn.dataset.font || '';
+    const text = getCopyText(fontName);
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = '✅';
+        setTimeout(() => { btn.textContent = '📋'; }, 1200);
+      } else {
+        const tmp = document.createElement('textarea');
+        tmp.value = text;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+        btn.textContent = '✅';
+        setTimeout(() => { btn.textContent = '📋'; }, 1200);
+      }
+    } catch {
+      alert('Metin kopyalanamadı, elle kopyalayın.');
+    }
+  });
+
+  shareBtn.addEventListener('click', async () => {
+    const params = new URLSearchParams();
+    params.set('nick', input.value || '');
+    params.set('qr', chkQrIcon.checked ? '1' : '0');
+    params.set('insta', chkInsta.checked ? '1' : '0');
+    params.set('at', chkAt.checked ? '1' : '0');
+    params.set('pos', getIconPos());
+    params.set('size', getSizeCm().toString());
+    const cat = getCategoryFilter();
+    params.set('cat', cat);
+    if (qrInput.value.trim()) params.set('qrLink', qrInput.value.trim());
+
+    const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        shareStatus.textContent = 'Link kopyalandı ✔';
+      } else {
+        const tmp = document.createElement('textarea');
+        tmp.value = shareUrl;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+        shareStatus.textContent = 'Link kopyalandı ✔';
+      }
+    } catch {
+      shareStatus.textContent = 'Kopyalanamadı.';
+    }
+    setTimeout(() => { shareStatus.textContent = ''; }, 3000);
+  });
+
+  function initFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const nick = params.get('nick') || 'Yusuftoprakk_';
+    input.value = nick;
+
+    const qrFlag    = params.get('qr');
+    const instaFlag = params.get('insta');
+    const atFlag    = params.get('at');
+    const pos       = params.get('pos');
+    const qrLink    = params.get('qrLink');
+    const size      = params.get('size');
+    const cat       = params.get('cat');
+
+    if (qrFlag !== null)    chkQrIcon.checked = qrFlag === '1';
+    if (instaFlag !== null) chkInsta.checked  = instaFlag === '1';
+    if (atFlag !== null)    chkAt.checked     = atFlag === '1';
+
+    if (pos === 'before' || pos === 'after') {
+      posRadios.forEach(r => { r.checked = (r.value === pos); });
+    }
+    if (size && ['15','20','30','40','50'].includes(size)) {
+      sizeSelect.value = size;
+    }
+    if (cat && ['all','imza','normal'].includes(cat)) {
+      catRadios.forEach(r => { r.checked = (r.value === cat); });
+    }
+
+    if (qrLink) {
+      qrInput.value = qrLink;
+      createQr(qrLink, nick);
+    } else {
+      render(nick);
+    }
+  }
+
+  initFromUrl();
+</script>
+</body>
+</html>
