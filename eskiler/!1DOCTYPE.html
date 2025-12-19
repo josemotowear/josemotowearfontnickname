@@ -6,216 +6,223 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    body{
-      background:#ffffff;
-      color:#111111;
-      font-family:Arial, sans-serif;
-      padding:8px;
-      margin:0;
+    /* ======================
+       GENEL TASARIM
+       ====================== */
+    body {
+      background: #ffffff;
+      color: #111111;
+      font-family: Arial, sans-serif;
+      padding: 8px;
+      margin: 0;
     }
-    .container{ max-width:900px; margin:0 auto; }
-
-    h1{
-      text-align:center;
-      font-size:30px;
-      margin:8px 0 12px;
-      font-weight:700;
-      letter-spacing:1px;
-      color:#111;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
     }
-
-    .top-panel{
-      background:#f7f7f7;
-      border-radius:14px;
-      padding:10px 12px 12px;
-      margin-bottom:14px;
-      border:1px solid #dddddd;
-      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    h1 {
+      text-align: center;
+      font-size: 30px;
+      margin: 8px 0 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #111;
     }
-
-    .input-box{ text-align:center; margin-bottom:8px; }
-    #nickInput{
-      width:100%;
-      max-width:640px;
-      padding:14px;
-      border-radius:10px;
-      border:1px solid #cccccc;
-      outline:none;
-      font-size:20px;
-      background:#ffffff;
-      color:#111;
-      text-align:center;
+    .top-panel {
+      background: #f7f7f7;
+      border-radius: 14px;
+      padding: 10px 12px 12px;
+      margin-bottom: 14px;
+      border: 1px solid #dddddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-    .options-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px 14px;
-      justify-content:center;
-      align-items:center;
-      margin-top:6px;
-      font-size:13px;
-      color:#333;
+    /* ======================
+       INPUT
+       ====================== */
+    .input-box {
+      text-align: center;
+      margin-bottom: 8px;
     }
-    .options-row label{
-      display:flex;
-      align-items:center;
-      gap:4px;
-      cursor:pointer;
+    #nickInput {
+      width: 100%;
+      max-width: 640px;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #cccccc;
+      outline: none;
+      font-size: 20px;
+      background: #ffffff;
+      color: #111;
+      text-align: center;
+    }
+
+    /* ======================
+       ÜST AYARLAR SATIRI
+       ====================== */
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #333;
+    }
+    .options-row label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
     }
     .options-row input[type="checkbox"],
-    .options-row input[type="radio"]{
-      accent-color:#ffb300;
-      cursor:pointer;
+    .options-row input[type="radio"] {
+      accent-color: #ffb300;
+      cursor: pointer;
     }
-    .options-group-title{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      color:#777;
-    }
-
-    .size-row{
-      margin-top:6px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      color:#333;
-    }
-    #sizeSelect{
-      padding:4px 6px;
-      border-radius:6px;
-      border:1px solid #cccccc;
-      background:#ffffff;
-      font-size:13px;
+    .options-group-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+      font-weight: 700;
     }
 
-    .share-row{
-      margin-top:8px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      align-items:center;
-      justify-content:flex-start;
-      font-size:12px;
-      color:#555;
+    /* ======================
+       BOYUT SEÇİMİ
+       ====================== */
+    .size-row {
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #333;
     }
-    #shareBtn{
-      padding:6px 10px;
-      border-radius:8px;
-      border:1px solid #ffb300;
-      background:#fff7e0;
-      cursor:pointer;
-      font-size:12px;
-      font-weight:600;
-      color:#885200;
-    }
-    #shareStatus{ min-height:16px; }
-
-    .font-card{
-      background:#fafafa;
-      padding:14px 16px 16px;
-      border-radius:12px;
-      margin-bottom:10px;
-      border:1px solid #dddddd;
-      transition:0.16s;
-      box-shadow:0 2px 6px rgba(0,0,0,0.06);
-    }
-    .font-card:hover{
-      transform:scale(1.01);
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    #sizeSelect {
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid #cccccc;
+      background: #ffffff;
+      font-size: 13px;
     }
 
-    .font-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:6px;
+    /* ======================
+       PAYLAŞ BUTONU
+       ====================== */
+    .share-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 12px;
+      color: #555;
     }
-    .font-name{
-      font-size:14px;
-      color:#444;
-      letter-spacing:0.5px;
+    #shareBtn {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ffb300;
+      background: #fff7e0;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: #885200;
     }
-    .font-tag{
-      font-size:11px;
-      padding:2px 6px;
-      border-radius:999px;
+    #shareStatus { min-height:16px; }
+
+    /* ======================
+       FONT KARTLARI
+       ====================== */
+    .font-card {
+      background: #fafafa;
+      padding: 14px 16px 16px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #dddddd;
+      transition: 0.16s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .font-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .font-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .font-name {
+      font-size: 14px;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+    .font-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
       background:#eee;
       color:#666;
       margin-left:6px;
     }
-
-    .copy-btn{
-      border:none;
-      background:transparent;
-      cursor:pointer;
-      font-size:18px;
-      padding:2px 4px;
-      color:#555;
+    .copy-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 2px 4px;
+      color: #555;
     }
-    .copy-btn:hover{ color:#000; transform:scale(1.1); }
-
-    .preview{
-      word-break:break-word;
-      padding-bottom:4px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      color:#000;
-    }
-    .nick-text{
-      display:inline-block;
-      margin:0 4px;
+    .copy-btn:hover {
+      color: #000;
+      transform: scale(1.1);
     }
 
-    /* =========================================================
-       İKON BOYUTLARI (BURAYI SEN MANUEL DEĞİŞTİRECEKSİN)
-       Sadece aşağıdaki rakamları değiştirmen yeterli.
-       ========================================================= */
-
-    /* Ortak ikon davranışı (hizalama vb.) */
-    .icon-common{
-      display:inline-block;
-      vertical-align:middle;
-      object-fit:contain;
+    /* ======================
+       ÖNİZLEME ALANI
+       ====================== */
+    .preview {
+      word-break: break-word;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #000;
+    }
+    .nick-text {
+      display: inline-block;
+      margin: 0 4px;
     }
 
-    /* Instagram PNG */
-    .icon-instagram{ width:72px; height:72px; }
-
-    /* TikTok PNG */
-    .icon-tiktok{ width:100px; height:100px; }
-
-    /* YouTube PNG */
-    .icon-youtube{ width:95px; height:95px; }
-
-    /* @ işareti (font-size ile büyür/küçülür) */
-    .icon-at{
-      font-size:40px;   /* BUNU DEĞİŞTİR */
-      line-height:1;
-      font-family:Arial, sans-serif !important;
-      font-weight:700;
-      color:#333;
-      margin-right:2px;
+    /* ======================
+       İKONLAR (HEPSİ AYNI BOY)
+       ====================== */
+    .inline-at {
+      font-size: 24px;         /* @ işareti sabit */
+      line-height: 1;
+      font-family: Arial, sans-serif !important;
+      font-weight: 800;
+      color: #333;
+      margin-right: 4px;
+    }
+    .social-icon{
+      width: 52px;             /* hepsi aynı boy */
+      height: 52px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    /* Mobilde ayrı istersen buradan da oynayabilirsin */
-    @media (max-width: 600px){
-  .preview{
-    flex-wrap: nowrap;      /* ALT SATIRA DÜŞMEYİ KAPAT */
-    white-space: nowrap;    /* yazıyı kırma */
-    overflow: hidden;       /* taşıyorsa gizle */
-  }
-}
-      /* örnek: mobilde biraz küçült */
-      .icon-instagram{ width:62px; height:62px; }
-      .icon-tiktok{ width:90px; height:90px; }
-      .icon-youtube{ width:85px; height:85px; }
-      .icon-at{ font-size:30px; }
+    @media (max-width: 600px) {
+      .preview { font-size: 30px; }
+      .social-icon{ width: 34px; height: 34px; }
+      .inline-at{ font-size: 22px; }
     }
   </style>
 </head>
@@ -224,25 +231,32 @@
 <div class="container">
   <h1>JOSE Font Önizleme Paneli</h1>
 
+  <!-- ======================
+       ÜST PANEL
+       ====================== -->
   <div class="top-panel">
+
+    <!-- Metin -->
     <div class="input-box">
       <input id="nickInput" type="text" placeholder="Ön izleme metnini yaz..." />
     </div>
 
-    <!-- İKONLAR -->
+    <!-- İkonlar + Konum -->
     <div class="options-row">
       <span class="options-group-title">İKONLAR:</span>
-      <label><input type="checkbox" id="chkInstagram"> Instagram</label>
-      <label><input type="checkbox" id="chkTiktok"> TikTok</label>
-      <label><input type="checkbox" id="chkYoutube"> YouTube</label>
-      <label><input type="checkbox" id="chkAt"> @ işareti</label>
 
-      <span class="options-group-title">KONUM (İKONLAR):</span>
+      <!-- 4 seçenek: Instagram / YouTube / TikTok / @ -->
+      <label><input type="checkbox" id="chkInstaIcon"> Instagram</label>
+      <label><input type="checkbox" id="chkYtIcon"> YouTube</label>
+      <label><input type="checkbox" id="chkTtIcon"> TikTok</label>
+      <label><input type="checkbox" id="chkAtIcon"> @ işareti</label>
+
+      <span class="options-group-title">KONUM:</span>
       <label><input type="radio" name="iconPos" value="before"> Baştan</label>
       <label><input type="radio" name="iconPos" value="after" checked> Sondan</label>
     </div>
 
-    <!-- KATEGORİ -->
+    <!-- Kategori -->
     <div class="options-row">
       <span class="options-group-title">KATEGORİ:</span>
       <label><input type="radio" name="catFilter" value="all" checked> Hepsi</label>
@@ -250,7 +264,7 @@
       <label><input type="radio" name="catFilter" value="normal"> Normal</label>
     </div>
 
-    <!-- BOYUT -->
+    <!-- Boyut -->
     <div class="size-row">
       <span class="options-group-title">BOYUT:</span>
       <label>Genişlik:
@@ -264,24 +278,26 @@
       </label>
     </div>
 
-    <!-- SHARE -->
+    <!-- Link ile paylaş -->
     <div class="share-row">
       <button id="shareBtn">Bu ayarları link olarak kopyala</button>
       <span id="shareStatus"></span>
     </div>
   </div>
 
+  <!-- Font listesi buraya basılır -->
   <div id="fontList"></div>
 </div>
 
 <script>
-  /* ======================
-     FONT TANIMLARI
-     (Senin attığın liste aynı mantıkla çalışıyor)
-     ====================== */
+  /* =========================================================
+     1) FONT TANIMLARI (SENİN LİSTENİ KORUDUM)
+     Not: Burada sadece ilk kısmı gösteriyorum.
+     Senin attığın tam listeyi aynen buraya koyabilirsin.
+     ========================================================= */
 
   const fontFiles = [
-    /* ---- İMZA FONTLAR ---- */
+    /* ---- İMZA FONTLAR (imza klasörü) ---- */
     { name: 'Amarilysse Glowheart', css: 'F_AmarilysseGlowheart', path: 'imza/Amarilysse Glowheart - Demo - Personal Use Only.ttf', format: 'truetype', type: 'imza' },
     { name: 'Andreagi Signature',   css: 'F_AndreagiSignature',   path: 'imza/Andreagi Signature.otf',                             format: 'opentype', type: 'imza' },
     { name: 'Autograf Personal',    css: 'F_AutografPersonal',    path: 'imza/Autograf_PersonalUseOnly.ttf',                       format: 'truetype', type: 'imza' },
@@ -450,97 +466,105 @@
   const fonts = fontFiles; // render için
 
 
-  /* ======================
-     UYGULAMA
-     ====================== */
+  /* =========================================================
+     2) UYGULAMA ELEMANLARI
+     ========================================================= */
+  const list        = document.getElementById('fontList');
+  const input       = document.getElementById('nickInput');
 
-  const list         = document.getElementById('fontList');
-  const input        = document.getElementById('nickInput');
+  // İkon checkboxları (4 adet)
+  const chkInsta    = document.getElementById('chkInstaIcon');
+  const chkYt       = document.getElementById('chkYtIcon');
+  const chkTt       = document.getElementById('chkTtIcon');
+  const chkAt       = document.getElementById('chkAtIcon');
 
-  const chkInstagram = document.getElementById('chkInstagram');
-  const chkTiktok    = document.getElementById('chkTiktok');
-  const chkYoutube   = document.getElementById('chkYoutube');
-  const chkAt        = document.getElementById('chkAt');
+  // Konum / kategori / boyut
+  const posRadios   = document.querySelectorAll('input[name="iconPos"]');
+  const catRadios   = document.querySelectorAll('input[name="catFilter"]');
+  const sizeSelect  = document.getElementById('sizeSelect');
 
-  const posRadios    = document.querySelectorAll('input[name="iconPos"]');
-  const catRadios    = document.querySelectorAll('input[name="catFilter"]');
-  const shareBtn     = document.getElementById('shareBtn');
-  const shareStatus  = document.getElementById('shareStatus');
-  const sizeSelect   = document.getElementById('sizeSelect');
+  // Paylaş
+  const shareBtn    = document.getElementById('shareBtn');
+  const shareStatus = document.getElementById('shareStatus');
 
-  function escapeHtml(str){
-    return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  /* =========================================================
+     3) YARDIMCI FONKSİYONLAR
+     ========================================================= */
+  function escapeHtml(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  function getIconPos(){
-    let v='after';
-    posRadios.forEach(r => { if (r.checked) v=r.value; });
+  function getIconPos() {
+    let v = 'after';
+    posRadios.forEach(r => { if (r.checked) v = r.value; });
     return v;
   }
 
-  function getCategoryFilter(){
-    let v='all';
-    catRadios.forEach(r => { if (r.checked) v=r.value; });
+  function getCategoryFilter() {
+    let v = 'all';
+    catRadios.forEach(r => { if (r.checked) v = r.value; });
     return v;
   }
 
-  function getSizeCm(){
-    return parseInt(sizeSelect.value || '20',10);
+  function getSizeCm() {
+    return parseInt(sizeSelect.value || '20', 10);
   }
 
-  function getPreviewFontSizePx(){
+  function getPreviewFontSizePx() {
     const cm = getSizeCm();
-    if (cm===15) return 32;
-    if (cm===20) return 40;
-    if (cm===30) return 48;
-    if (cm===40) return 56;
-    if (cm===50) return 64;
+    if (cm === 15) return 32;
+    if (cm === 20) return 40;
+    if (cm === 30) return 48;
+    if (cm === 40) return 56;
+    if (cm === 50) return 64;
     return 40;
   }
 
-  function iconImg(src, cls, alt){
-    return `<img src="${src}" class="icon-common ${cls}" alt="${alt}">`;
+  /* =========================================================
+     4) İKON + METİN BİRLEŞTİRME (ASIL MEVZU BURASI)
+     - 4 ikon: Instagram / YouTube / TikTok / @
+     - Hepsi aynı boy: .social-icon
+     ========================================================= */
+  function buildNickWithIcons(text) {
+    const clean = escapeHtml(text || 'JOSE');
+    const nickSpan = `<span class="nick-text">${clean}</span>`;
+
+    // @
+    const atHtml = chkAt.checked ? `<span class="inline-at">@</span>` : '';
+
+    // 3 sosyal ikon (dosyalar aynı klasörde olmalı)
+    const instaHtml = chkInsta.checked
+      ? `<img src="instagram_vectorized.png" class="social-icon" alt="Instagram">`
+      : '';
+
+    const ytHtml = chkYt.checked
+      ? `<img src="youtube_vectorized.png" class="social-icon" alt="YouTube">`
+      : '';
+
+    const ttHtml = chkTt.checked
+      ? `<img src="tiktok_vectorized.png" class="social-icon" alt="TikTok">`
+      : '';
+
+    const pos = getIconPos();
+
+    if (pos === 'before') {
+      // BAŞTAN: INSTA → YT → TT → @ → NICK
+      return instaHtml + ytHtml + ttHtml + atHtml + nickSpan;
+    } else {
+      // SONDAN: @ → NICK → INSTA → YT → TT
+      return atHtml + nickSpan + instaHtml + ytHtml + ttHtml;
+    }
   }
 
-  function buildNickWithIcons(text){
-  const clean = escapeHtml(text || 'JOSE');
-
-  // @ + Nick (ASLA AYRILMAZ)
-  const nickWithAt = chkAt.checked
-    ? `<span class="icon-common icon-at">@</span><span class="nick-text">${clean}</span>`
-    : `<span class="nick-text">${clean}</span>`;
-
-  // Sosyal ikonlar
-  const instaHtml = chkInstagram.checked
-    ? iconImg('instagram_vectorized.png','icon-instagram','Instagram')
-    : '';
-
-  const ytHtml = chkYoutube.checked
-    ? iconImg('youtube_vectorized.png','icon-youtube','YouTube')
-    : '';
-
-  const ttHtml = chkTiktok.checked
-    ? iconImg('tiktok_vectorized.png','icon-tiktok','TikTok')
-    : '';
-
-  const socialIcons = `${instaHtml}${ytHtml}${ttHtml}`;
-  const pos = getIconPos();
-
-  // Konum SADECE sosyal ikonları etkiler
-  if (pos === 'before'){
-    return `${socialIcons}${nickWithAt}`;
-  } else {
-    return `${nickWithAt}${socialIcons}`;
-  }
-}
-
-
-
-  function render(text){
+  /* =========================================================
+     5) EKRANA BASMA
+     ========================================================= */
+  function render(text) {
     list.innerHTML = '';
+
     const content = buildNickWithIcons(text);
-    const sizePx = getPreviewFontSizePx();
-    const cat = getCategoryFilter();
+    const sizePx  = getPreviewFontSizePx();
+    const cat     = getCategoryFilter();
 
     fonts
       .filter(f => cat === 'all' || f.type === cat)
@@ -563,16 +587,20 @@
       });
   }
 
-  function getCopyText(fontName){
-    const nick = input.value || '';
-    const sizeCm = getSizeCm();
-    const posText = getIconPos() === 'before' ? 'Baştan' : 'Sondan';
+  /* =========================================================
+     6) KOPYALAMA (Sağ üstteki 📋)
+     ========================================================= */
+  function getCopyText(fontName) {
+    const nick    = input.value || '';
+    const sizeCm  = getSizeCm();
+    const pos     = getIconPos();
+    const posText = pos === 'before' ? 'Baştan' : 'Sondan';
 
     const icons = [];
-    if (chkInstagram.checked) icons.push('Instagram');
-    if (chkYoutube.checked)   icons.push('YouTube');
-    if (chkTiktok.checked)    icons.push('TikTok');
-    if (chkAt.checked)        icons.push('@');
+    if (chkInsta.checked) icons.push('Instagram');
+    if (chkYt.checked)    icons.push('YouTube');
+    if (chkTt.checked)    icons.push('TikTok');
+    if (chkAt.checked)    icons.push('@');
 
     const iconsText = icons.length ? icons.join(', ') : 'Yok';
 
@@ -585,21 +613,15 @@ Boyut: ${sizeCm} cm`
     );
   }
 
-  // Events
-  input.addEventListener('input', e => render(e.target.value));
-  [chkInstagram, chkTiktok, chkYoutube, chkAt].forEach(el => el.addEventListener('change', () => render(input.value)));
-  posRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
-  catRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
-  sizeSelect.addEventListener('change', () => render(input.value));
-
   document.addEventListener('click', async (e) => {
     const btn = e.target.closest('.copy-btn');
     if (!btn) return;
+
     const fontName = btn.dataset.font || '';
     const text = getCopyText(fontName);
 
-    try{
-      if (navigator.clipboard && navigator.clipboard.writeText){
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text);
       } else {
         const tmp = document.createElement('textarea');
@@ -616,12 +638,16 @@ Boyut: ${sizeCm} cm`
     }
   });
 
+  /* =========================================================
+     7) AYARLARI LİNK OLARAK KOPYALA (Share)
+     - QR yok. Sadece: nick, ikonlar, pos, size, cat
+     ========================================================= */
   shareBtn.addEventListener('click', async () => {
     const params = new URLSearchParams();
     params.set('nick', input.value || '');
-    params.set('ig', chkInstagram.checked ? '1' : '0');
-    params.set('tt', chkTiktok.checked ? '1' : '0');
-    params.set('yt', chkYoutube.checked ? '1' : '0');
+    params.set('insta', chkInsta.checked ? '1' : '0');
+    params.set('yt', chkYt.checked ? '1' : '0');
+    params.set('tt', chkTt.checked ? '1' : '0');
     params.set('at', chkAt.checked ? '1' : '0');
     params.set('pos', getIconPos());
     params.set('size', getSizeCm().toString());
@@ -629,8 +655,8 @@ Boyut: ${sizeCm} cm`
 
     const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 
-    try{
-      if (navigator.clipboard && navigator.clipboard.writeText){
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(shareUrl);
       } else {
         const tmp = document.createElement('textarea');
@@ -644,41 +670,60 @@ Boyut: ${sizeCm} cm`
     } catch {
       shareStatus.textContent = 'Kopyalanamadı.';
     }
-    setTimeout(() => { shareStatus.textContent=''; }, 3000);
+    setTimeout(() => { shareStatus.textContent = ''; }, 3000);
   });
 
-  function initFromUrl(){
+  /* =========================================================
+     8) URL'DEN AYAR OKUMA (Sayfayı linkle açınca aynı ayarlar gelsin)
+     ========================================================= */
+  function initFromUrl() {
     const params = new URLSearchParams(window.location.search);
 
     const nick = params.get('nick') || 'Yusuftoprakk_';
     input.value = nick;
 
-    const ig = params.get('ig');
-    const tt = params.get('tt');
-    const yt = params.get('yt');
-    const at = params.get('at');
-    const pos = params.get('pos');
-    const size = params.get('size');
-    const cat = params.get('cat');
+    const instaFlag = params.get('insta');
+    const ytFlag    = params.get('yt');
+    const ttFlag    = params.get('tt');
+    const atFlag    = params.get('at');
+    const pos       = params.get('pos');
+    const size      = params.get('size');
+    const cat       = params.get('cat');
 
-    if (ig !== null) chkInstagram.checked = (ig === '1');
-    if (tt !== null) chkTiktok.checked = (tt === '1');
-    if (yt !== null) chkYoutube.checked = (yt === '1');
-    if (at !== null) chkAt.checked = (at === '1');
+    if (instaFlag !== null) chkInsta.checked = instaFlag === '1';
+    if (ytFlag !== null)    chkYt.checked    = ytFlag === '1';
+    if (ttFlag !== null)    chkTt.checked    = ttFlag === '1';
+    if (atFlag !== null)    chkAt.checked    = atFlag === '1';
 
-    if (pos === 'before' || pos === 'after'){
+    if (pos === 'before' || pos === 'after') {
       posRadios.forEach(r => { r.checked = (r.value === pos); });
     }
-    if (size && ['15','20','30','40','50'].includes(size)){
+
+    if (size && ['15','20','30','40','50'].includes(size)) {
       sizeSelect.value = size;
     }
-    if (cat && ['all','imza','normal'].includes(cat)){
+
+    if (cat && ['all','imza','normal'].includes(cat)) {
       catRadios.forEach(r => { r.checked = (r.value === cat); });
     }
 
     render(nick);
   }
 
+  /* =========================================================
+     9) EVENTLER (Tıklayınca anında güncellesin)
+     ========================================================= */
+  input.addEventListener('input', e => render(e.target.value));
+
+  [chkInsta, chkYt, chkTt, chkAt].forEach(el =>
+    el.addEventListener('change', () => render(input.value))
+  );
+
+  posRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
+  catRadios.forEach(r => r.addEventListener('change', () => render(input.value)));
+  sizeSelect.addEventListener('change', () => render(input.value));
+
+  // Başlat
   initFromUrl();
 </script>
 </body>
